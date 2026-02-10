@@ -342,7 +342,15 @@ nav .btn-nav:hover {
 }
 
 .grid-3 {
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
+}
+
+.grid-3 > * {
+  flex: 0 1 calc((100% - 4rem) / 3);
+  min-width: 280px;
 }
 
 .grid-2 {
@@ -356,6 +364,7 @@ nav .btn-nav:hover {
   box-shadow: var(--shadow);
   border: 1px solid var(--soft-blush);
   transition: transform var(--transition), box-shadow var(--transition);
+  overflow: hidden;
 }
 
 .card:hover {
@@ -733,9 +742,11 @@ footer {
 /* Card images */
 .card-img {
   width: calc(100% + 4rem);
+  max-width: none;
   margin: -2rem -2rem 1.5rem -2rem;
   height: 220px;
   object-fit: cover;
+  object-position: center;
   border-radius: var(--radius) var(--radius) 0 0;
   display: block;
 }
