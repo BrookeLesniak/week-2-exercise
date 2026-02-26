@@ -98,9 +98,321 @@
   <!-- Booking content goes here -->
   <section class="section">
     <div class="container">
-      <!-- Steps will be added here -->
-    </div>
+            <!-- Steps will be added here -->
+
+      <!-- Existing Booking Banner -->
+        <div id="existingBanner" class="booking-existing-banner" style="display:none;">
+        <p>You already have a booking: <span id="existingBookingDetails"></span></p>
+        <button class="btn-cancel-booking" onclick="cancelBooking()">Cancel Booking</button>
+      </div>
+
+
+      <!-- Booking Steps -->
+      <div id="bookingSteps">
+
+        <!-- Step 2: Service Selection -->
+        <h2 class="section-title">Select a Service</h2>
+        <div class="booking-service-grid" id="serviceGrid">
+          <div class="booking-service-card" data-service="Reign Refresh"
+               onclick="selectService(this)"
+               onkeydown="if(event.key==='Enter'||event.key===' ')selectService(this)"
+               tabindex="0" role="button" aria-pressed="false">
+            <h3>Reign Refresh</h3>
+            <p>Expert cuts and styling tailored to your face, texture, and lifestyle.</p>
+          </div>
+          <div class="booking-service-card" data-service="Crown &amp; Color"
+               onclick="selectService(this)"
+               onkeydown="if(event.key==='Enter'||event.key===' ')selectService(this)"
+               tabindex="0" role="button" aria-pressed="false">
+            <h3>Crown &amp; Color</h3>
+            <p>Highlighting and balayage services crafted by our senior colorists.</p>
+          </div>
+          <div class="booking-service-card" data-service="Royal Treatment"
+               onclick="selectService(this)"
+               onkeydown="if(event.key==='Enter'||event.key===' ')selectService(this)"
+               tabindex="0" role="button" aria-pressed="false">
+            <h3>Royal Treatment</h3>
+            <p>Deep conditioning and repair therapies that restore strength, shine, and vitality.</p>
+          </div>
+          <div class="booking-service-card" data-service="Rose Ritual"
+               onclick="selectService(this)"
+               onkeydown="if(event.key==='Enter'||event.key===' ')selectService(this)"
+               tabindex="0" role="button" aria-pressed="false">
+            <h3>Rose Ritual</h3>
+            <p>Our signature scalp massage and treatment — a spa-like sensory experience.</p>
+          </div>
+          <div class="booking-service-card" data-service="Blooming Bride"
+               onclick="selectService(this)"
+               onkeydown="if(event.key==='Enter'||event.key===' ')selectService(this)"
+               tabindex="0" role="button" aria-pressed="false">
+            <h3>Blooming Bride</h3>
+            <p>Wedding and special event packages for your most important moments.</p>
+          </div>
+        </div>
+        <p> class="booking-input-error" id="serviceError" role="alert"></p>
+        <!-- Step 3: Date & Time -->
+        <div class="booking-datetime">
+          <h2 class="section-title">Choose a Date &amp; Time</h2>
+          <div class="booking-date-wrapper">
+            <label for="bookingDate">Select a Date</label>
+            <input type="date" id="bookingDate" class="booking-date-input" onchange="onDateChange(this.value)" />
+            <p class="booking-input-error" id="dateError" role="alert"></p
+          </div>
+          <div class="booking-timeslots">
+            <button class="booking-timeslot" data-time="9:00 AM"  aria-pressed="false" onclick="selectTime(this)">9:00 AM</button>
+            <button class="booking-timeslot" data-time="10:00 AM" aria-pressed="false" onclick="selectTime(this)">10:00 AM</button>
+            <button class="booking-timeslot" data-time="11:00 AM" aria-pressed="false" onclick="selectTime(this)">11:00 AM</button>
+            <button class="booking-timeslot" data-time="12:00 PM" aria-pressed="false" onclick="selectTime(this)">12:00 PM</button>
+            <button class="booking-timeslot" data-time="1:00 PM"  aria-pressed="false" onclick="selectTime(this)">1:00 PM</button>
+            <button class="booking-timeslot" data-time="2:00 PM"  aria-pressed="false" onclick="selectTime(this)">2:00 PM</button>
+            <button class="booking-timeslot" data-time="3:00 PM"  aria-pressed="false" onclick="selectTime(this)">3:00 PM</button>
+            <button class="booking-timeslot" data-time="4:00 PM"  aria-pressed="false" onclick="selectTime(this)">4:00 PM</button>
+            <button class="booking-timeslot" data-time="5:00 PM"  aria-pressed="false" onclick="selectTime(this)">5:00 PM</button>
+            <button class="booking-timeslot" data-time="6:00 PM"  aria-pressed="false" onclick="selectTime(this)">6:00 PM</button>
+            <button class="booking-timeslot" data-time="7:00 PM"  aria-pressed="false" onclick="selectTime(this)">7:00 PM</button>
+          </div>
+          <p class="booking-input-error" id="timeError" role="alert"></p>
+        </div>
+
+        <!-- Step 4: Customer Details -->
+        <div class="booking-details">
+          <h2 class="section-title">Your Details</h2>
+          <form class="booking-form" id="bookingForm" onsubmit="handleSubmit(event)" novalidate>
+            <div class="booking-form-row">
+              <div class="booking-form-group">
+                <label for="firstName">First Name</label>
+                <input type="text" id="firstName" class="booking-input" placeholder="Jane" required />
+                <span class="booking-input-error" id="firstNameError"></span>
+              </div>
+              <div class="booking-form-group">
+                <label for="lastName">Last Name</label>
+                <input type="text" id="lastName" class="booking-input" placeholder="Smith" required />
+                <span class="booking-input-error" id="lastNameError"></span>
+              </div>
+            </div>
+            <div class="booking-form-group">
+              <label for="email">Email</label>
+              <input type="email" id="email" class="booking-input" placeholder="jane@example.com" required />
+              <span class="booking-input-error" id="emailError"></span>
+            </div>
+            <div class="booking-form-group">
+              <label for="phone">Phone Number</label>
+              <input type="tel" id="phone" class="booking-input" placeholder="(555) 000-0000" required />
+              <span class="booking-input-error" id="phoneError"></span>
+            </div>
+            <div class="booking-form-group">
+              <label for="notes">Special Requests <span class="optional">(optional)</span></label>
+              <textarea id="notes" class="booking-input booking-textarea" placeholder="Any allergies, preferences, or notes..." rows="3"></textarea>
+            </div>
+            <button type="submit" class="booking-submit">Book Appointment</button>
+          </form>
+        </div>
+
+      </div><!-- /#bookingSteps -->
+
+      <!-- Step 5: Confirmation -->
+       <div id="bookingConfirmation" style="display:none;" aria-live="polite"></div>
+
+    </div><!-- /.container -->
   </section>
+
+  <script>
+  let selectedService = null;
+  let selectedDate    = null;
+  let selectedTime    = null;
+
+  // Set min date to today (local time)
+  const today = new Date();
+  const yyyy  = today.getFullYear();
+  const mm    = String(today.getMonth() + 1).padStart(2, '0');
+  const dd    = String(today.getDate()).padStart(2, '0');
+  document.getElementById('bookingDate').min = `${yyyy}-${mm}-${dd}`;
+
+  // ── Step 6: Check for existing booking on page load ──────────────────────
+  (function checkExistingBooking() {
+    const saved = localStorage.getItem('rr_booking');
+    if (!saved) return;
+    try {
+      const b = JSON.parse(saved);
+      document.getElementById('existingBookingDetails').innerHTML =
+        `<em>${b.service}</em> &mdash; ${formatDate(b.date)} at ${b.time}`;
+      document.getElementById('existingBanner').style.display = 'flex';
+    } catch (e) {
+      localStorage.removeItem('rr_booking');
+    }
+  })();
+
+  function formatDate(dateStr) {
+    if (!dateStr) return dateStr;
+    // Parse as local date to avoid UTC timezone shift
+    const [y, m, d] = dateStr.split('-').map(Number);
+    return new Date(y, m - 1, d).toLocaleDateString('en-US', {
+      weekday: 'long', month: 'long', day: 'numeric', year: 'numeric'
+    });
+  }
+
+  // ── Step 6: Cancel booking ────────────────────────────────────────────────
+  function cancelBooking() {
+    localStorage.removeItem('rr_booking');
+    document.getElementById('existingBanner').style.display = 'none';
+  }
+
+  function selectService(card) {
+    document.querySelectorAll('.booking-service-card').forEach(c => {
+      c.classList.remove('selected');
+      c.setAttribute('aria-pressed', 'false');
+    });
+    card.classList.add('selected');
+    card.setAttribute('aria-pressed', 'true');
+    selectedService = card.dataset.service;
+  }
+
+  function onDateChange(value) {
+    selectedDate = value;
+    selectedTime = null;
+    document.querySelectorAll('.booking-timeslot').forEach(btn => {
+      btn.classList.remove('selected');
+      btn.setAttribute('aria-pressed', 'false');
+    });
+  }
+
+  function selectTime(btn) {
+    document.querySelectorAll('.booking-timeslot').forEach(b => {
+      b.classList.remove('selected');
+      b.setAttribute('aria-pressed', 'false');
+    });
+    btn.classList.add('selected');
+    btn.setAttribute('aria-pressed', 'true');
+    selectedTime = btn.dataset.time;
+  }
+
+  function isValidPhone(raw) {
+    const digits = raw.replace(/\D/g, '');
+    return digits.length === 10 || (digits.length === 11 && digits[0] === '1');
+  }
+
+  function clearError(inputId, errorId) {
+    const input = document.getElementById(inputId);
+    const error = document.getElementById(errorId);
+    if (!input || !error) return;
+    input.addEventListener('input', () => {
+      input.classList.remove('error');
+      error.textContent = '';
+    }, { once: true });
+  }
+
+  function setError(inputId, errorId, message) {
+    const input = document.getElementById(inputId);
+    const error = document.getElementById(errorId);
+    input.classList.add('error');
+    error.textContent = message;
+    clearError(inputId, errorId);
+  }
+
+    function validateForm() {
+    document.querySelectorAll('.booking-input-error').forEach(el => el.textContent = '');
+    document.querySelectorAll('.booking-input').forEach(el => el.classList.remove('error'));
+
+    if (!selectedService) {
+      const el = document.getElementById('serviceError');
+      el.textContent = 'Please select a service before continuing.';
+      el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      return false;
+    }
+    if (!selectedDate) {
+      const el = document.getElementById('dateError');
+      el.textContent = 'Please select a date before continuing.';
+      el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      return false;
+    }
+    if (selectedDate < `${yyyy}-${mm}-${dd}`) {
+      const el = document.getElementById('dateError');
+      el.textContent = 'Please select a future date.';
+      el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      return false;
+    }
+    if (!selectedTime) {
+      const el = document.getElementById('timeError');
+      el.textContent = 'Please select a time slot before continuing.';
+      el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      return false;
+    }
+
+    let valid = true;
+    const rules = [
+      { id: 'firstName', errorId: 'firstNameError', test: v => v.length > 0,                          message: 'First name is required.' },
+      { id: 'lastName',  errorId: 'lastNameError',  test: v => v.length > 0,                          message: 'Last name is required.' },
+      { id: 'email',     errorId: 'emailError',     test: v => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v), message: 'A valid email is required.' },
+      { id: 'phone',     errorId: 'phoneError',     test: v => isValidPhone(v),                       message: 'Enter a valid 10-digit phone number.' },
+    ];
+    rules.forEach(({ id, errorId, test, message }) => {
+      const value = document.getElementById(id).value.trim();
+      if (!test(value)) { setError(id, errorId, message); valid = false; }
+    });
+    return valid;
+  }
+
+
+  // ── Step 5: Show confirmation screen ─────────────────────────────────────
+  function showConfirmation(booking) {
+    document.getElementById('bookingSteps').style.display = 'none';
+
+    const conf = document.getElementById('bookingConfirmation');
+    conf.innerHTML = `
+      <div class="booking-confirmation">
+        <p class="booking-confirmation-icon">&#10003;</p>
+        <h3>You&rsquo;re all set, ${booking.firstName}!</h3>
+        <div class="booking-confirmation-detail">
+          <strong>${booking.service}</strong>
+          ${formatDate(booking.date)}<br>${booking.time}
+        </div>
+        <p class="booking-confirmation-email">
+          A confirmation will be sent to <strong>${booking.email}</strong>.
+        </p>
+        <button class="booking-submit" onclick="startNewBooking()">Make Another Booking</button>
+      </div>
+    `;
+    conf.style.display = 'block';
+  }
+
+  function startNewBooking() {
+    localStorage.removeItem('rr_booking');
+    location.reload();
+  }
+
+    function handleSubmit(event) {
+    event.preventDefault();
+    if (!validateForm()) return;
+
+    const submitBtn = event.target.querySelector('.booking-submit');
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Booking…';
+
+    const booking = {
+      service:   selectedService,
+      date:      selectedDate,
+      time:      selectedTime,
+      firstName: document.getElementById('firstName').value.trim(),
+      lastName:  document.getElementById('lastName').value.trim(),
+      email:     document.getElementById('email').value.trim(),
+      phone:     document.getElementById('phone').value.trim(),
+      notes:     document.getElementById('notes').value.trim(),
+      bookedAt:  new Date().toISOString(),
+    };
+
+    try {
+      localStorage.setItem('rr_booking', JSON.stringify(booking));
+    } catch (e) {
+      // localStorage unavailable (e.g. private browsing) — proceed without saving
+    }
+    showConfirmation(booking);
+  }
+
+</script>
+
+
+
+
 
   <!-- Footer -->
   <footer>
