@@ -240,6 +240,12 @@ nav .btn-nav::after {
   display: none;
 }
 
+nav .btn-nav.active {
+  background: var(--deep-rose);
+  color: var(--white);
+  box-shadow: 0 4px 14px rgba(139, 72, 84, 0.3);
+}
+
 nav .btn-nav:hover {
   background: var(--deep-rose);
   color: var(--white);
@@ -728,6 +734,10 @@ footer {
 /* ===== Images ===== */
 
 /* Hero with photo background */
+.hero--booking {
+  background: linear-gradient(135deg, rgba(139,72,84,0.88) 0%, rgba(183,110,121,0.78) 60%, rgba(201,145,154,0.75) 100%);
+}
+
 .hero--photo {
   background-size: cover;
   background-position: center;
