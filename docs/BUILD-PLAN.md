@@ -53,8 +53,3 @@ On page load, check localStorage. If a booking exists, show a "You have an exist
 
 ---
 
-## Step 7 — Polish & style
-
-Match the Rose & Reign color scheme (rose gold, blush, champagne). Add transitions for step changes. Make it mobile-friendly.
-
-**Review (10 min):** Test on a narrow browser window. Visually consistent with the rest of the site.
